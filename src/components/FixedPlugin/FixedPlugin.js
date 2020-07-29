@@ -19,6 +19,7 @@ export default function FixedPlugin(props) {
   const handleClick = () => {
     props.handleFixedClick();
   };
+
   return (
     <div
       className={classnames("fixed-plugin", {

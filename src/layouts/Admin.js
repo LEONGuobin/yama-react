@@ -11,10 +11,9 @@ import Footer from "components/Footer/Footer.js";
 import Sidebar from "components/Sidebar/Sidebar.js";
 import FixedPlugin from "components/FixedPlugin/FixedPlugin.js";
 
-import Chat from "components/Chat/Chat.js";
 
+import { routesManager, routesTenant } from "routes.js";
 
-import routes from "routes.js";
 
 import styles from "assets/jss/material-dashboard-react/layouts/adminStyle.js";
 
@@ -23,9 +22,23 @@ import logo from "assets/img/reactlogo.png";
 
 let ps;
 
+const isManager = () => {
+  return false;
+}
+
+const routes = () => {
+  if (isManager()) {
+    return routesManager;
+  }
+  else {
+    return routesTenant;
+  }
+};
+
 const switchRoutes = (
   <Switch>
-    {routes.map((prop, key) => {
+    {routes().map((prop, key) => {
+
       if (prop.layout === "/admin") {
         return (
           <Route
@@ -53,7 +66,6 @@ export default function Admin({ ...rest }) {
   const [color, setColor] = React.useState("blue");
 
   const [fixedClasses, setFixedClasses] = React.useState("dropdown");
-  const [chatClasses, setChatClasses] = React.useState("dropdown");
 
   const [mobileOpen, setMobileOpen] = React.useState(false);
   const handleImageClick = image => {
@@ -67,14 +79,6 @@ export default function Admin({ ...rest }) {
       setFixedClasses("dropdown show");
     } else {
       setFixedClasses("dropdown");
-    }
-  };
-
-  const handleChatClick = () => {
-    if (chatClasses === "dropdown") {
-      setChatClasses("dropdown show");
-    } else {
-      setChatClasses("dropdown");
     }
   };
 
@@ -110,7 +114,9 @@ export default function Admin({ ...rest }) {
   return (
     <div className={classes.wrapper}>
       <Sidebar
-        routes={routes}
+
+        routes={routes()}
+
         logoText={"Creative Tim"}
         logo={logo}
         image={image}
@@ -121,7 +127,9 @@ export default function Admin({ ...rest }) {
       />
       <div className={classes.mainPanel} ref={mainPanel}>
         <Navbar
-          routes={routes}
+
+          routes={routes()}
+
           handleDrawerToggle={handleDrawerToggle}
           {...rest}
         />
@@ -131,8 +139,10 @@ export default function Admin({ ...rest }) {
             <div className={classes.container}>{switchRoutes}</div>
           </div>
         ) : (
-          <div className={classes.map}>{switchRoutes}</div>
-        )}
+
+            <div className={classes.map}>{switchRoutes}</div>
+          )}
+
         {getRoute() ? <Footer /> : null}
         <FixedPlugin
           handleImageClick={handleImageClick}
@@ -141,15 +151,6 @@ export default function Admin({ ...rest }) {
           bgImage={image}
           handleFixedClick={handleFixedClick}
           fixedClasses={fixedClasses}
-        />
-        
-        <Chat
-          handleImageClick={handleImageClick}
-          handleColorClick={handleColorClick}
-          bgColor={color}
-          bgImage={image}
-          handleChatClick={handleChatClick}
-          chatClasses={chatClasses}
         />
 
       </div>
