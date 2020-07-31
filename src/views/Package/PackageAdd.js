@@ -2,9 +2,8 @@ import React, {useState} from "react";
 import MaterialTable, {MTableToolbar} from "material-table";
 import Container from "@material-ui/core/Container";
 import {makeStyles} from "@material-ui/core/styles";
-import { v4 as uuidv4 } from 'uuid';
 import {primaryCardHeader} from "../../assets/jss/material-dashboard-react";
-import {AddBox, Search} from "@material-ui/icons";
+import {AddBox} from "@material-ui/icons";
 import {API_ROOT, AUTH_HEADER} from "../../constants";
 
 const useStyles = makeStyles((theme) => ({
@@ -28,14 +27,7 @@ const PackageAdd = props => {
                 locker: element.locker,
             }
         })
-        // var raw = JSON.stringify([{"username":"b","location":"apt 101","locker":"A5"}]);
-        //
-        // var requestOptions = {
-        //     method: 'POST',
-        //     headers: myHeaders,
-        //     body: raw,
-        //     redirect: 'follow'
-        // };
+
         fetch(`${API_ROOT}/manager/delivery`, {
             method: 'POST',
             headers: {

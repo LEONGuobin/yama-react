@@ -1,6 +1,5 @@
 import React, {useEffect, useState} from 'react';
 import PackageTable from "./PackageTable";
-import PackageAdd from "./PackageAdd";
 import {API_ROOT, AUTH_HEADER} from "../../constants";
 
 
@@ -60,7 +59,6 @@ const PackageResident = () => {
 
     return (
         <div>
-            {/* display different component according to authority*/}
             <PackageTable user="resident" data={packages} setData={setPackages}/>
         </div>
     );
