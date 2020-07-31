@@ -10,25 +10,19 @@
     "chartist": "0.10.1",
     "classnames": "2.2.6",
     "history": "4.10.1",
-
     "material-table": "^1.67.1",
-
     "material-ui": "^0.20.2",
-
     "perfect-scrollbar": "1.5.0",
     "prop-types": "15.7.2",
     "react": "16.13.1",
     "react-chartist": "0.14.3",
     "react-dom": "16.13.1",
     "react-google-maps": "9.4.5",
-
     "react-redux": "^7.2.1",
     "react-router-dom": "5.2.0",
     "react-scripts": "3.4.1",
     "react-swipeable-views": "0.13.9",
     "redux": "^4.0.5",
-
-
     "use-immer": "^0.4.0",
     "use-socket.io-client": "^1.1.0",
     "uuid": "^8.2.0"

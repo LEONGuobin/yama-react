@@ -6,6 +6,7 @@ import {CheckBox, CheckBoxOutlineBlank} from '@material-ui/icons';
 import {
     primaryCardHeader,
 } from "assets/jss/material-dashboard-react.js";
+import {API_ROOT, AUTH_HEADER} from "../../constants";
 
 const useStyles = makeStyles((theme) => ({
     paper: {
@@ -17,16 +18,16 @@ const useStyles = makeStyles((theme) => ({
 const PackageTable = props => {
     // fetch the data
     // get /package
-    const {data, setData} = props;
+    const {data, setData, user} = props;
     const handleChange = (rowData) => {
-        if(rowData.status === true){
+        if (rowData.status === true) {
             alert("You have already confirm the packages");
             return;
         }
         alert("Confirm the receiving? Your operation cannot be recover.");
         //setData({ ...data, [event.target.name]: event.target.checked });
         console.log(rowData);
-        //checkRemote(rowData.packageUUID)
+        checkRemote(rowData.packageUUID)
         setData((prevState) => {
             const data = [...prevState];
             console.log(data.indexOf(rowData));
@@ -36,34 +37,43 @@ const PackageTable = props => {
         console.log(data);
     };
 
-    // const checkRemote = (uuid) => {
-    //         fetch(`$http://yama-env.eba-jrxdggtp.us-east-2.elasticbeanstalk.com/manager/delivery/${uuid}`, {
-    //             method: 'PUT',
-    //             headers: {
-    //             },
-    //             id: uuid,
-    //         })
-    //             .then((response) => {
-    //                 console.log(response);
-    //                 throw new Error('Fail to check.');
-    //             })
-    //             .catch((e) => {
-    //                 console.error(e);
-    //             });
-    // }
+    const checkRemote = (uuid) => {
+        const token = localStorage.getItem("TOKEN_KEY");
+
+        const url = `${API_ROOT}/${user}/delivery/${uuid}`
+        console.log(url);
+        fetch(url, {
+            method: 'PUT',
+            headers: {
+                'Authorization': `${AUTH_HEADER} ${token}`,
+                'Access-Control-Request-Methods': "POST, GET, OPTIONS, DELETE, PUT",
+            },
+        })
+            .then((response) => {
+                //console.log(response);
+                if(response.ok){
+                    return;
+                }else{
+                    throw new Error('Fail to check.');
+                }
+            })
+            .catch((e) => {
+                console.error(e);
+            });
+    }
 
     const classes = useStyles();
 
     const columns = [
-        {title: "Resident Name", field: "residentName", width: 150},
-        {title: "Resident Address", field: "residentAddress", width: 150},
-        {title: "Time", field: "time", width: 150},
-        {title: "Package ID", field: "packageUUID", width: 150},
-        {title: "Locker", field: "locker", width: 150},
+        {title: "Resident Name", field: "residentName", width: "16%"},
+        {title: "Resident Address", field: "residentAddress", width: "16%"},
+        {title: "Time", field: "time", width: "16%"},
+        {title: "Package ID", field: "packageUUID", width: "16%"},
+        {title: "Locker", field: "locker", width: "16%"},
         {
-            title: "Status", field: "status", width: 150,
+            title: "Status", field: "status", width: "10%",
             render: rowData => {
-                return (rowData.status == true ? <CheckBox/> : <CheckBoxOutlineBlank/>);
+                return (rowData.status === true ? <CheckBox/> : <CheckBoxOutlineBlank/>);
             }
         },
     ];
@@ -77,7 +87,7 @@ const PackageTable = props => {
                     title="Packages"
                     components={{
                         Toolbar: props => (
-                            <div style={{ ...primaryCardHeader, color: "#FFF"}}>
+                            <div style={{...primaryCardHeader, color: "#FFF"}}>
                                 <MTableToolbar {...props} />
                             </div>
                         )

@@ -6,8 +6,10 @@ class App extends React.Component {
     isLoggedIn: Boolean(localStorage.getItem('TOKEN_KEY')),
   }
 
-  handleLoginSucceed = (token) => {
-    localStorage.setItem('TOKEN_KEY', token)
+  handleLoginSucceed = (tokenJson) => {
+    const token = JSON.parse(tokenJson);
+    localStorage.setItem('TOKEN_KEY', token.token);
+    localStorage.setItem('USER_NAME', token.username);
     this.setState({ isLoggedIn: true });
   }
 

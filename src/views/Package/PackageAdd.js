@@ -5,6 +5,7 @@ import {makeStyles} from "@material-ui/core/styles";
 import { v4 as uuidv4 } from 'uuid';
 import {primaryCardHeader} from "../../assets/jss/material-dashboard-react";
 import {AddBox, Search} from "@material-ui/icons";
+import {API_ROOT, AUTH_HEADER} from "../../constants";
 
 const useStyles = makeStyles((theme) => ({
     paper: {
@@ -13,24 +14,35 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-const PackageAdd = (getPackages) => {
+const PackageAdd = props => {
     // fetch the data
-
+    const {getPackages} = props;
     const submit = () => {
         console.log(data);
-        const config = {
+        const token = localStorage.getItem("TOKEN_KEY");
+        console.log(token);
+        const raw = data.map(element => {
+            return {
+                username: element.username,
+                location: element.location,
+                locker: element.locker,
+            }
+        })
+        // var raw = JSON.stringify([{"username":"b","location":"apt 101","locker":"A5"}]);
+        //
+        // var requestOptions = {
+        //     method: 'POST',
+        //     headers: myHeaders,
+        //     body: raw,
+        //     redirect: 'follow'
+        // };
+        fetch(`${API_ROOT}/manager/delivery`, {
             method: 'POST',
             headers: {
+                'Authorization': `${AUTH_HEADER} ${token}`,
+                "Content-Type":  "application/json"
             },
-            body: data,
-        }
-        console.log(config);
-
-        fetch(`http://yama-env.eba-jrxdggtp.us-east-2.elasticbeanstalk.com/manager/delivery`, {
-            method: 'POST',
-            headers: {
-            },
-            body: data,
+            body: JSON.stringify(raw),
         })
             .then((response) => {
                 console.log(response);
@@ -45,16 +57,6 @@ const PackageAdd = (getPackages) => {
     }
 
     const [data, setData] = useState([
-        {
-            userId: "a1",
-            location: "Apt 309",
-            locker: "Place Two",
-        },
-        {
-            userId: "a2",
-            location: "Apt 307",
-            locker: "Place Two",
-        },
     ])
 
 
@@ -62,7 +64,7 @@ const PackageAdd = (getPackages) => {
     const classes = useStyles();
 
     const columns = [
-        {title: "Resident Name", field: "userId", width: 150},
+        {title: "Resident Name", field: "username", width: 150},
         {title: "Resident Address", field: "location", width: 150},
         {title: "Locker", field: "locker", width: 150},
     ];
