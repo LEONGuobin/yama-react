@@ -14,7 +14,10 @@ const PackageManager = () => {
         setLoading(true);
         setError('');
 
-        const token = localStorage.getItem("TOKEN_KEY");
+        const token = localStorage.getItem("KEY");
+        // const token = JSON.parse(tokenJson);
+        // const token_key = token.token;
+        // const user = token.username
 
         console.log("Get Packages");
         fetch(`${API_ROOT}/manager/delivery`, {

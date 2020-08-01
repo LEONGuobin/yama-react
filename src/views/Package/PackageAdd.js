@@ -18,7 +18,10 @@ const PackageAdd = props => {
     const {getPackages} = props;
     const submit = () => {
         console.log(data);
-        const token = localStorage.getItem("TOKEN_KEY");
+        const token = localStorage.getItem("KEY");
+        // const token = JSON.parse(tokenJson);
+        // const token_key = token.token;
+
         console.log(token);
         const raw = data.map(element => {
             return {

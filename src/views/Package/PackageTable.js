@@ -38,7 +38,7 @@ const PackageTable = props => {
     };
 
     const checkRemote = (uuid) => {
-        const token = localStorage.getItem("TOKEN_KEY");
+        const token = localStorage.getItem("KEY");
 
         const url = `${API_ROOT}/${user}/delivery/${uuid}`
         console.log(url);

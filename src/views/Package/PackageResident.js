@@ -16,8 +16,10 @@ const PackageResident = () => {
         setLoading(true);
         setError('');
 
-        const token = localStorage.getItem("TOKEN_KEY");
-        const username = localStorage.getItem("USER_NAME")
+        const token = localStorage.getItem("KEY");
+        // const token = JSON.parse(tokenJson);
+        // const token_key = token.token;
+
         console.log("Get Packages");
         fetch(`${API_ROOT}/resident/delivery`, {
             method: 'GET',
