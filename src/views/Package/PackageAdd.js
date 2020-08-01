@@ -41,6 +41,7 @@ const PackageAdd = props => {
             .then((response) => {
                 console.log(response);
                 if (response.ok) {
+                    setData([]);
                     return getPackages();
                 }
                 throw new Error('Failed to Add.');
@@ -59,7 +60,7 @@ const PackageAdd = props => {
 
     const columns = [
         {title: "Resident Name", field: "username", width: 150},
-        {title: "Resident Address", field: "location", width: 150},
+        {title: "Apt Number", field: "location", width: 150},
         {title: "Locker", field: "locker", width: 150},
     ];
 
@@ -91,21 +92,31 @@ const PackageAdd = props => {
                         onRowAdd: newData =>
                             new Promise((resolve, reject) => {
                                 setTimeout(() => {
-                                    setData([...data, newData]);
+                                    if(!newData.location || !newData.username || !newData.locker){
+                                        alert("Each field cannot be empty!");
+                                        reject();
+                                    }else {
+                                        setData([...data, newData]);
 
-                                    resolve();
-                                }, 1000)
+                                        resolve();
+                                    }
+                                }, 300)
                             }),
                         onRowUpdate: (newData, oldData) =>
                             new Promise((resolve, reject) => {
                                 setTimeout(() => {
-                                    const dataUpdate = [...data];
-                                    const index = oldData.tableData.id;
-                                    dataUpdate[index] = newData;
-                                    setData([...dataUpdate]);
+                                    if(!newData.location || !newData.username || !newData.locker){
+                                        alert("Each field cannot be empty!");
+                                        reject();
+                                    }else{
+                                        const dataUpdate = [...data];
+                                        const index = oldData.tableData.id;
+                                        dataUpdate[index] = newData;
+                                        setData([...dataUpdate]);
 
-                                    resolve();
-                                }, 1000)
+                                        resolve();
+                                    }
+                                }, 300)
                             }),
                         onRowDelete: oldData =>
                             new Promise((resolve, reject) => {
@@ -116,7 +127,7 @@ const PackageAdd = props => {
                                     setData([...dataDelete]);
 
                                     resolve()
-                                }, 1000)
+                                }, 300)
                             }),
                     }}
                     actions={[

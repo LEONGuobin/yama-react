@@ -69,7 +69,7 @@ const PackageTable = props => {
 
     const columns = [
         {title: "Resident Name", field: "residentName", width: "16%"},
-        {title: "Resident Address", field: "residentAddress", width: "16%"},
+        {title: "Apt Number", field: "residentAddress", width: "16%"},
         {title: "Time", field: "time", width: "16%"},
         {title: "Package ID", field: "packageUUID", width: "16%"},
         {title: "Locker", field: "locker", width: "16%"},
@@ -96,7 +96,10 @@ const PackageTable = props => {
                         )
                     }}
                     options={{
-                        searchFieldStyle: {color: "#FFF"}
+                        searchFieldStyle: {color: "#FFF"},
+                        rowStyle: rowData => ({
+                            backgroundColor: (rowData.status === true) ? '#EEE' : '#FFF'
+                        })
                     }}
                     actions={[
                         {
