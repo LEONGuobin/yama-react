@@ -8,6 +8,7 @@ import {
 } from "assets/jss/material-dashboard-react.js";
 import {API_ROOT, AUTH_HEADER} from "../../constants";
 
+
 const useStyles = makeStyles((theme) => ({
     paper: {
         marginTop: theme.spacing(8),
@@ -37,6 +38,7 @@ const PackageTable = props => {
         console.log(data);
     };
 
+
     const checkRemote = (uuid) => {
         const token = localStorage.getItem("KEY");
 
@@ -61,6 +63,7 @@ const PackageTable = props => {
                 console.error(e);
             });
     }
+
 
     const classes = useStyles();
 
