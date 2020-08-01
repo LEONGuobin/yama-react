@@ -102,20 +102,6 @@ export const routesTenant = [
     component: PackageResident,
     layout: "/admin"
   },
-  {
-    path: "/package",
-    name: "Package",
-    icon: InboxIcon,
-    component: PackageManager,
-    layout: "/admin"
-  },
-  {
-    path: "/packageResident",
-    name: "PackageResident",
-    icon: InboxIcon,
-    component: PackageResident,
-    layout: "/admin"
-  }
 ];
 
 export const routesManager = [
@@ -158,12 +144,5 @@ export const routesManager = [
     component: PackageManager,
     layout: "/admin"
   },
-  {
-    path: "/package",
-    name: "Package",
-    icon: InboxIcon,
-    component: PackageManager,
-    layout: "/admin"
-  }
 ];
 
