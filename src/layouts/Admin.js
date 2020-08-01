@@ -11,23 +11,17 @@ import Footer from "components/Footer/Footer.js";
 import Sidebar from "components/Sidebar/Sidebar.js";
 import FixedPlugin from "components/FixedPlugin/FixedPlugin.js";
 
-
 import { routesManager, routesTenant } from "routes.js";
-
 
 import styles from "assets/jss/material-dashboard-react/layouts/adminStyle.js";
 
+import logo from "assets/img/Company.png";
 import bgImage from "assets/img/sidebar-2.jpg";
-import logo from "assets/img/reactlogo.png";
 
 let ps;
 
-const isManager = () => {
-  return false;
-}
-
 const routes = () => {
-  if (isManager()) {
+  if (localStorage.getItem('TOKEN_KEY') !== null && JSON.parse(localStorage.getItem('TOKEN_KEY')).userType !== 'Tenant') {
     return routesManager;
   }
   else {
@@ -38,7 +32,6 @@ const routes = () => {
 const switchRoutes = (
   <Switch>
     {routes().map((prop, key) => {
-
       if (prop.layout === "/admin") {
         return (
           <Route
@@ -64,9 +57,7 @@ export default function Admin({ ...rest }) {
   // states and functions
   const [image, setImage] = React.useState(bgImage);
   const [color, setColor] = React.useState("blue");
-
   const [fixedClasses, setFixedClasses] = React.useState("dropdown");
-
   const [mobileOpen, setMobileOpen] = React.useState(false);
   const handleImageClick = image => {
     setImage(image);
@@ -114,10 +105,8 @@ export default function Admin({ ...rest }) {
   return (
     <div className={classes.wrapper}>
       <Sidebar
-
         routes={routes()}
-
-        logoText={"Creative Tim"}
+        logoText={"432 Park Ave"}
         logo={logo}
         image={image}
         handleDrawerToggle={handleDrawerToggle}
@@ -127,9 +116,7 @@ export default function Admin({ ...rest }) {
       />
       <div className={classes.mainPanel} ref={mainPanel}>
         <Navbar
-
           routes={routes()}
-
           handleDrawerToggle={handleDrawerToggle}
           {...rest}
         />
@@ -139,10 +126,8 @@ export default function Admin({ ...rest }) {
             <div className={classes.container}>{switchRoutes}</div>
           </div>
         ) : (
-
             <div className={classes.map}>{switchRoutes}</div>
           )}
-
         {getRoute() ? <Footer /> : null}
         <FixedPlugin
           handleImageClick={handleImageClick}
@@ -152,7 +137,6 @@ export default function Admin({ ...rest }) {
           handleFixedClick={handleFixedClick}
           fixedClasses={fixedClasses}
         />
-
       </div>
     </div>
   );

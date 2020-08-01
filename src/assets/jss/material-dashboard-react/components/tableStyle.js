@@ -71,6 +71,9 @@ const tableStyle = theme => ({
     display: "table-row",
     outline: "none",
     verticalAlign: "middle"
+  },
+  button: {
+    marginRight: theme.spacing(1)
   }
 });
 

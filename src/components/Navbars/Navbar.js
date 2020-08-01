@@ -44,9 +44,7 @@ export default function Header(props) {
           </Button>
         </div>
         <Hidden smDown implementation="css">
-
           {props.rtlActive ? <RTLNavbarLinks /> : <AdminNavbarLinks handleLogout={props.handleLogout} />}
-
         </Hidden>
         <Hidden mdUp implementation="css">
           <IconButton

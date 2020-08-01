@@ -23,10 +23,7 @@ import styles from "assets/jss/material-dashboard-react/components/headerLinksSt
 
 const useStyles = makeStyles(styles);
 
-
-
 export default function AdminNavbarLinks(props) {
-
 
   const classes = useStyles();
   const [openNotification, setOpenNotification] = React.useState(null);
@@ -211,9 +208,7 @@ export default function AdminNavbarLinks(props) {
                     </MenuItem>
                     <Divider light />
                     <MenuItem
-
                       onClick={props.handleLogout}
-
                       className={classes.dropdownItem}
                     >
                       Logout

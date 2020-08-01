@@ -515,7 +515,6 @@ footer ul li a:hover {
 
 
 
-
 .chat-fixed-plugin {
   font-family: "Roboto", "Helvetica", "Arial", sans-serif;
   font-weight: 300;
@@ -608,6 +607,52 @@ footer ul li a:hover {
 }
 
 
+
 * {
   letter-spacing: normal !important;
 }
+
+.userAddress{
+  position: absolute;
+  right: 30px;
+}
+
+.payBlock{
+  position: relative;
+  left: 20%;
+  margin: 70px;
+}
+
+.payContainer{
+  position: relative;
+  left: 5%;
+}
+
+.payColumn1 {
+  float: left;
+  padding: 20px;
+  font-size: 40px;
+}
+
+.payColumn2{
+  position: relative;
+  left: 20%;
+  margin-bottom: 40px;
+}
+
+.payHistory{
+  text-decoration: underline;
+}
+
+.payConfirm{
+  position: relative;
+  left: 10%;
+  margin: 70px;
+}
+
+.payComplete{
+  position: relative;
+  left: 15%;
+  margin: 70px;
+}
+
