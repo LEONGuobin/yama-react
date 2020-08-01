@@ -13,6 +13,7 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
+
 const PackageAdd = props => {
     // fetch the data
     const {getPackages} = props;
@@ -35,6 +36,7 @@ const PackageAdd = props => {
                 "Content-Type":  "application/json"
             },
             body: JSON.stringify(raw),
+
         })
             .then((response) => {
                 console.log(response);
